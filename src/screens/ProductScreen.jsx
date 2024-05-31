@@ -16,24 +16,24 @@ import { useEffect, useState } from "react";
 
 
 
-
 import React from "react";
 
 const ProductScreen = () => {
-  const [products, setProducts] = useState([]);
+
+  const [product, setProduct] = useState([]);
+
+  const {id: productId} = useParams();
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
+      const { data } = await axios.get(`/api/products/${productId}`);
+      setProduct(data);
     };
     fetchProducts();
   } 
-  , []);  
-  const { id } = useParams();
-  const product = products.find((p) => p._id === id);
-  console.log(product);
+  , [productId]);  
 
+   
   return<>
   <Link className="btn btn-light my-3" to="/">
     Go Back
