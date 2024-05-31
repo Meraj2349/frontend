@@ -1,18 +1,35 @@
 //need the id from the url
 
 import { useParams } from "react-router-dom";
-import products from "../products";
 //import link
 import { Link } from "react-router-dom";
 //import rating
 import Rating from "../components/Rating";
+
+
 //import bootstrap
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
+
+import axios from "axios";
+
+import { useEffect, useState } from "react";
+
+
 
 
 import React from "react";
 
 const ProductScreen = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get("/api/products");
+      setProducts(data);
+    };
+    fetchProducts();
+  } 
+  , []);  
   const { id } = useParams();
   const product = products.find((p) => p._id === id);
   console.log(product);
