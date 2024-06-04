@@ -4,6 +4,7 @@ import Product from "../components/product";
 
 import { useGetProductsQuery } from "../slices/productsApiSlices";
 import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -14,7 +15,7 @@ const HomeScreen = () => {
       {isLoading ? (
      <Loader />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="danger">{error?.data?.message}</Message>
       ) : (
         <Row>
           {products.map((product) => (

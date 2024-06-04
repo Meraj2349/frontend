@@ -1,18 +1,11 @@
-//need the id from the url
-
 import { useParams } from "react-router-dom";
-//import link
 import { Link } from "react-router-dom";
-//import rating
 import Rating from "../components/Rating";
-
-//import bootstrap
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-
 import { useUseGetProductDetailsQuery } from "../slices/productsApiSlices";
-
 import React from "react";
 import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -30,7 +23,7 @@ const ProductScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <div>{error?.data?.message || error.error}</div>
+        <Message variant="danger">{error?.data?.message}</Message>
       ) : (
         <Row>
           <Col md={6}>
